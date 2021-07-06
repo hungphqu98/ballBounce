@@ -6,26 +6,38 @@ var b = gameScreen.getContext("2d")
 
 var radius = 10
 var x = Math.floor(Math.random() * gameScreen.width)
-var y = Math.floor(Math.random() * gameScreen.height) 
+var y = Math.floor(Math.random() * gameScreen.height)
+
 if (x < radius || y < radius || x > gameScreen.width - radius || y > gameScreen.height - radius) {
   var x = Math.floor(Math.random() * gameScreen.width)
   var y = Math.floor(Math.random() * gameScreen.height)
 }
-var vx = Math.floor(Math.random()*4)
-var vy = Math.floor(Math.random()*4)
+
+var vx = Math.floor(Math.random()*3)
+var vy = Math.floor(Math.random()*3)
+
 if (vx === 0 && vy === 0) {
-  var vx = Math.floor(Math.random()*4)
-  var vy = Math.floor(Math.random()*4)
+  var vx = Math.floor(Math.random()*3)
+  var vy = Math.floor(Math.random()*3)
 }
-console.log(x,vx,y,vy)
+
 angle = Math.atan(vy/vx)* 180/Math.PI
 console.log("góc di chuyển ban đầu :" + angle)
 
-main = () => {
-  requestAnimationFrame(main)
+var animation
+
+speed = () => {
 
   b.clearRect(0,0,gameScreen.width,gameScreen.height)
-  
+
+  main()
+
+  animation = requestAnimationFrame(speed)
+
+}
+
+main = () => {
+
   b.beginPath()
   b.strokeStyle = "black"
   b.arc(x,y,radius, 0, Math.PI*2)
@@ -49,25 +61,27 @@ main = () => {
   y = y + vy
 
 }
-var pressed = false
+
+
+
 window.addEventListener('keydown', e => {
-  if(!pressed) {
-    pressed = true
-    switch (e.key) {
-        case 'ArrowUp' :
-          vx *= 2
-          vy *= 2
-            break
-        case 'ArrowDown' :
-          vx /= 2
-          vy /= 2
-            break
-      }
-    }
+  switch (e.key) {
+      case 'ArrowUp' :
+        start()
+          break
+      case 'ArrowDown' :
+        stop()
+          break
+  }
 })
 
-window.addEventListener('keyup', e =>{
-  pressed = false
-})
+function start() {
+  animation = requestAnimationFrame(speed);
+}
+function stop() {
+  if (animation) {
+    cancelAnimationFrame(animation);
+  }
+}
 
-main()
+start()
