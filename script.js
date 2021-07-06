@@ -62,8 +62,6 @@ main = () => {
 
 }
 
-
-
 window.addEventListener('keydown', e => {
   switch (e.key) {
       case 'ArrowUp' :
