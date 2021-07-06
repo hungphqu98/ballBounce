@@ -13,12 +13,12 @@ if (x < radius || y < radius || x > gameScreen.width - radius || y > gameScreen.
   var y = Math.floor(Math.random() * gameScreen.height)
 }
 
-var vx = Math.floor(Math.random()*3)
-var vy = Math.floor(Math.random()*3)
+var vx = Math.floor(Math.random()*5)
+var vy = Math.floor(Math.random()*5)
 
 if (vx === 0 && vy === 0) {
-  var vx = Math.floor(Math.random()*3)
-  var vy = Math.floor(Math.random()*3)
+  var vx = Math.floor(Math.random()*5)
+  var vy = Math.floor(Math.random()*5)
 }
 
 angle = Math.atan(vy/vx)* 180/Math.PI
@@ -57,8 +57,8 @@ main = () => {
   if ( y - radius < 0 ) {
     vy = 0 - vy
   }
-  x = x + vx
-  y = y + vy
+  x = x - vx
+  y = y - vy
 
 }
 
