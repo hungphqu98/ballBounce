@@ -7,17 +7,17 @@ var b = gameScreen.getContext("2d")
 var radius = 10
 var x = Math.floor(Math.random() * gameScreen.width)
 var y = Math.floor(Math.random() * gameScreen.height) 
-if (x < radius || y < radius) {
+if (x < radius || y < radius || x > gameScreen.width - radius || y > gameScreen.height - radius) {
   var x = Math.floor(Math.random() * gameScreen.width)
   var y = Math.floor(Math.random() * gameScreen.height)
 }
-var vx = Math.floor(Math.random()*5)
-var vy = Math.floor(Math.random()*5)
+var vx = Math.floor(Math.random()*3)
+var vy = Math.floor(Math.random()*3)
 if (vx === 0 && vy === 0) {
-  var vx = Math.floor(Math.random()*5)
-  var vy = Math.floor(Math.random()*5)
+  var vx = Math.floor(Math.random()*3)
+  var vy = Math.floor(Math.random()*3)
 }
-
+console.log(x,vx,y,vy)
 angle = Math.atan(vy/vx)* 180/Math.PI
 console.log("góc di chuyển ban đầu :" + angle)
 
