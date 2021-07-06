@@ -11,11 +11,11 @@ if (x < radius || y < radius || x > gameScreen.width - radius || y > gameScreen.
   var x = Math.floor(Math.random() * gameScreen.width)
   var y = Math.floor(Math.random() * gameScreen.height)
 }
-var vx = Math.floor(Math.random()*3)
-var vy = Math.floor(Math.random()*3)
+var vx = Math.floor(Math.random()*4)
+var vy = Math.floor(Math.random()*4)
 if (vx === 0 && vy === 0) {
-  var vx = Math.floor(Math.random()*3)
-  var vy = Math.floor(Math.random()*3)
+  var vx = Math.floor(Math.random()*4)
+  var vy = Math.floor(Math.random()*4)
 }
 console.log(x,vx,y,vy)
 angle = Math.atan(vy/vx)* 180/Math.PI
@@ -49,18 +49,25 @@ main = () => {
   y = y + vy
 
 }
-
+var pressed = false
 window.addEventListener('keydown', e => {
-  switch (e.key) {
-      case 'ArrowUp' :
-        vx *= 2
-        vy *= 2
-          break
-      case 'ArrowDown' :
-        vx /= 2
-        vy /= 2
-          break
+  if(!pressed) {
+    pressed = true
+    switch (e.key) {
+        case 'ArrowUp' :
+          vx *= 2
+          vy *= 2
+            break
+        case 'ArrowDown' :
+          vx /= 2
+          vy /= 2
+            break
+      }
     }
-  })
+})
+
+window.addEventListener('keyup', e =>{
+  pressed = false
+})
 
 main()
