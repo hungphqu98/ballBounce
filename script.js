@@ -1,42 +1,42 @@
-// Lấy kích thước browser 
+// Get browser size 
 var gameScreen = document.querySelector("canvas")
   gameScreen.width = window.innerWidth
   gameScreen.height = window.innerHeight
 
-// Vẽ quả bóng 
+// Get ball starting position 
 var b = gameScreen.getContext("2d")
 
 var radius = 10
 var x = Math.floor(Math.random() * gameScreen.width)
 var y = Math.floor(Math.random() * gameScreen.height)
 
-// Nếu vị trí bóng chèn vào viền browser thì lấy lại  
+// If ball overlaps with browser edge then get another starting position
 if (x < radius || y < radius || x > gameScreen.width - radius || y > gameScreen.height - radius) {
   var x = Math.floor(Math.random() * gameScreen.width)
   var y = Math.floor(Math.random() * gameScreen.height)
 }
 
-// Lấy vận tốc của bóng
+// Randomize ball speed
 var vx = Math.floor(Math.random()*5)
 var vy = Math.floor(Math.random()*5)
 
-// Nếu bóng đứng yên thì lấy lại vận tốc  
+// Randomize speed again if ball stands still 
 if (vx === 0 && vy === 0) {
   var vx = Math.floor(Math.random()*5)
   var vy = Math.floor(Math.random()*5)
 }
 
-// Góc di chuyển ban đầu của quả bóng 
+// Initial angle of ball movement
 angle = Math.atan(vy/vx)* 180/Math.PI
 console.log("góc di chuyển ban đầu :" + angle)
 
-// Tạo id cho animation
+// Create id for animation
 var animation
 
-// Hàm chuyển động
+// Ball move function
 move = () => {
 
-  // Xóa vị trí cũ của bóng
+  // Erase former position of the ball
   b.clearRect(0,0,gameScreen.width,gameScreen.height)
 
   main()
@@ -45,7 +45,7 @@ move = () => {
 
 }
 
-// Hàm xác định vị trí tiếp theo của bóng
+// Determine the next position of the ball
 main = () => {
 
   b.beginPath()
@@ -55,7 +55,7 @@ main = () => {
   b.fillStyle = "red"
   b.fill()
   
-  // Nếu bóng chạm vào tường thì bật ngược lại  
+  // Ball bounces when touches wall 
   if (radius + x > gameScreen.width || x - radius < 0 ) {
     vx = 0 - vx
   }
@@ -63,28 +63,28 @@ main = () => {
     vy = 0 - vy
   }
 
-  // Bóng di chuyển đến vị trí tiếp theo
+  // Ball moves to the next position
   x = x - vx
   y = y - vy
 
 }
 
-// Hàm bắt đầu chuyển động
+// Start animation function
 start = () => {
   animation = requestAnimationFrame(move);
 }
 
-// Hàm dừng chuyển động
+// Stop animation function
 stop = () => {
   if (animation) {
     cancelAnimationFrame(animation);
   }
 }
 
-// Gọi hàm bắt đầu chuyển động
+// Start the animation
 start()
 
-// Gán nút mũi tên để điều khiển chuyển động  
+// Use arrow keys to modify speed  
 window.addEventListener('keydown', e => {
   switch (e.key) {
       case 'ArrowUp' :
